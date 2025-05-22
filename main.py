@@ -1,11 +1,15 @@
 from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi.responses import StreamingResponse
 import pytesseract, cv2, io, numpy as np
 from fpdf import FPDF
 from docx import Document
 import qrcode
 
 app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"status": "ASED backend is live"}
 
 @app.post("/ocr")
 async def ocr(file: UploadFile = File(...)):
